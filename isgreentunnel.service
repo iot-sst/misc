@@ -1,0 +1,17 @@
+[Unit]
+Description=ILS Reverse SSH Service
+ConditionPathExists=|/usr/bin
+After=network.target
+
+[Service]
+User=isgreen
+#ExecStart=sshpass -p 12142448@Nome /usr/bin/ssh -NTC -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -o StrictHostKeyChecking=no -i /home/isgreen/.ssh/gateway-tunnel -R $(echo $REVERSE_SSH_PORT):localhost:22 isgreen@isgreen.no-ip.org
+#Type=forking
+ExecStart=/home/isgreen/scripts/create_ssh_tunnel.sh 
+
+# Restart every >2 seconds to avoid StartLimitInterval failure
+RestartSec=30
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
