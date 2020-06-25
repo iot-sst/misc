@@ -4,7 +4,7 @@ ConditionPathExists=|/usr/bin
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/sshpass -p 12142448@Nome /usr/bin/ssh -NTC -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -o StrictHostKeyChecking=no -R 40020:localhost:22 isgreen@isgreen.no-ip.org
+ExecStart=/usr/bin/sshpass -p 12142448@Nome /usr/bin/ssh -NTC -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -o StrictHostKeyChecking=no -R 39999:localhost:22 isgreen@isgreen.no-ip.org
 
 RestartSec=30
 Restart=always
