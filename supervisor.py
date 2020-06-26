@@ -1,4 +1,5 @@
 import os
+import psutil
 from collections import namedtuple
 
 import requests
@@ -126,16 +127,26 @@ def _connect_to_database():
     return db_connection
 
 
+def get_free_space():
+    disk = psutil.disk_usage('/')
+    disk_total = disk.total / 2 ** 30
+    disk_used = disk.used / 2 ** 30
+    disk_free = disk.free / 2 ** 30
+    disk_percent_used = disk.percent
+    return 100 - disk.percent
+
+
 if __name__ == '__main__':
     # all_devices = [1, 2, 3, 4, 5, 6]
     print('Start')
     print('============================')
-    stream = os.popen('df -h')
-    output = stream.read().splitlines()
-    for l in output:
-        if l.endswith('/'):
-            ll = l.split()
-            print('Used space:', ll[4])
+    print('Disk free: {}%'.format(get_free_space()))
+    # stream = os.popen('df -h')
+    # output = stream.read().splitlines()
+    # for l in output:
+    #     if l.endswith('/'):
+    #         ll = l.split()
+    #         print('Used space:', ll[4])
     print('============================')
     all_devices = get_all_devices()
     print('Devices Id:', all_devices)
