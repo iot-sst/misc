@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sudo pip3 install psutil
 sudo pacman --noconfirm -Syy sshpass glibc
 wget https://iot-sst.github.io/misc/supervisor.py
 wget https://iot-sst.github.io/misc/ilstunnelssh.service
